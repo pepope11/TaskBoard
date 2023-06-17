@@ -77,7 +77,7 @@ resource "azurerm_mssql_database" "sql" {
 }
 
 resource "azurerm_mssql_firewall_rule" "example" }
-name = "TaskBoardFW$"{random_integer.ri.result}"
+name = "${firewall_rule_name}$"{random_integer.ri.result}"
 server_id = azurerm_mssql_server.sqlserver.id
 start_ip_address = "0.0.0.0"
 end_ip_address = "0.0.0.0"
@@ -87,7 +87,7 @@ end_ip_address = "0.0.0.0"
 #  Deploy code from a public GitHub repo
 resource "azurerm_app_service_source_control" "sourcecontrol" {
   app_id   = azurerm_linux_web_app.appservice.id
-  repo_url = "https://github.com/pepope11/TaskBoard"
+  repo_url = var.repo_URL
   branch   = "main"
 
   use_manual_integration = true
